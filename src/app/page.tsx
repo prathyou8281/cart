@@ -7,7 +7,16 @@ import Image from "next/image";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-const products = [
+// ✅ Define a Product type
+interface Product {
+  id: number;
+  name: string;
+  price: number;
+  img: string;
+  qty?: number; // optional, used for cart quantity
+}
+
+const products: Product[] = [
   { id: 1, name: "Gaming Laptop", price: 89999, img: "/images/laptop.jpg" },
   { id: 2, name: "Wireless Headset", price: 2999, img: "/images/headset.jpg" },
   { id: 3, name: "Mechanical Keyboard", price: 4499, img: "/images/keyboard.jpg" },
@@ -16,13 +25,15 @@ const products = [
 export default function Home() {
   const router = useRouter();
   const [showPopup, setShowPopup] = useState(false);
-  const [addedItem, setAddedItem] = useState<any>(null);
+  const [addedItem, setAddedItem] = useState<Product | null>(null);
 
-  const handleAddToCart = (product: any) => {
-    const existingCart = JSON.parse(localStorage.getItem("cart") || "[]");
-    const itemExists = existingCart.find((item: any) => item.id === product.id);
+  // ✅ Add to Cart
+  const handleAddToCart = (product: Product) => {
+    const existingCart: Product[] = JSON.parse(localStorage.getItem("cart") || "[]");
 
-    if (itemExists) itemExists.qty += 1;
+    const itemExists = existingCart.find((item) => item.id === product.id);
+
+    if (itemExists) itemExists.qty = (itemExists.qty || 1) + 1;
     else existingCart.push({ ...product, qty: 1 });
 
     localStorage.setItem("cart", JSON.stringify(existingCart));
@@ -30,7 +41,8 @@ export default function Home() {
     setShowPopup(true);
   };
 
-  const handleBuyNow = (product: any) => {
+  // ✅ Buy Now
+  const handleBuyNow = (product: Product) => {
     localStorage.setItem("cart", JSON.stringify([{ ...product, qty: 1 }]));
     router.push("/cart");
   };
@@ -94,18 +106,15 @@ export default function Home() {
         </div>
       </section>
 
-      {/* 🛒 Add-to-Cart Popup — iPhone safe */}
+      {/* 🛒 Add-to-Cart Popup */}
       <AnimatePresence>
-        {showPopup && (
+        {showPopup && addedItem && (
           <motion.div
             className="fixed inset-0 flex items-center justify-center z-[9999] bg-black/70 backdrop-blur-md p-safe"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            style={{
-              WebkitOverflowScrolling: "touch",
-              paddingBottom: "env(safe-area-inset-bottom)", // ✅ iPhone safe inset
-            }}
+            style={{ WebkitOverflowScrolling: "touch", paddingBottom: "env(safe-area-inset-bottom)" }}
           >
             <motion.div
               className="bg-gradient-to-br from-blue-900 via-black to-gray-900 border border-blue-500/30 rounded-2xl p-6 text-center shadow-2xl w-[90%] max-w-sm"
@@ -118,7 +127,7 @@ export default function Home() {
                 ✅ Added to Cart
               </h3>
               <p className="text-gray-300 mb-6">
-                {addedItem?.name} has been successfully added to your cart.
+                {addedItem.name} has been successfully added to your cart.
               </p>
 
               <div className="flex flex-col sm:flex-row justify-center gap-4">
