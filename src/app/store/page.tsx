@@ -72,7 +72,7 @@ export default function Home() {
       {/* 🛍️ Product Section */}
       <section className="flex-grow px-4 sm:px-6 md:px-12 pb-20">
         <h2 className="text-3xl sm:text-4xl font-bold mb-10 text-center text-blue-400 tracking-wide">
-          🔥 Trending Products
+          
         </h2>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">

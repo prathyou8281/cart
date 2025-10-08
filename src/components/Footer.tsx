@@ -2,41 +2,26 @@
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-300 py-8 mt-16">
-      <div className="container mx-auto px-6 flex flex-col md:flex-row justify-between items-center">
+    <footer className="bg-gradient-to-r from-[#0f172a] via-[#1e293b] to-[#0f172a] text-gray-300 py-6 mt-16 border-t border-gray-700/60">
+      <div className="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between text-center md:text-left">
+        
         {/* Left Section */}
-        <div className="text-center md:text-left">
+        <div className="md:w-1/3 mb-4 md:mb-1">
           <h2 className="text-2xl font-bold text-white tracking-wide">Opiqo</h2>
-          <p className="text-sm text-gray-400 mt-1">
-            Innovating Technology. Inspiring Possibilities.
-          </p>
+          <p className="text-sm text-gray-400">Quality That Moves You</p>
         </div>
 
-        {/* Middle Section - Navigation */}
-        <div className="flex space-x-6 mt-4 md:mt-0">
-          <a href="/" className="hover:text-white transition-colors">
-           
-          </a>
-          <a href="/products" className="hover:text-white transition-colors">
-            
-          </a>
-          <a href="/about" className="hover:text-white transition-colors">
-           
-          </a>
-          <a href="/contact" className="hover:text-white transition-colors">
-           
-          </a>
+        {/* Center Section */}
+        <div className="md:w-1/3 mb-4 md:mb-0 text-center text-xs md:text-sm text-gray-400">
+          Designed & Developed with ❤️ by{" "}
+          <span className="text-white font-semibold">Opiqo Team</span>
         </div>
 
-        {/* Right Section - Copyright */}
-        <div className="text-sm text-gray-500 mt-4 md:mt-0">
-          © {new Date().getFullYear()} <span className="text-white font-semibold">Opiqo</span>. All rights reserved.
+        {/* Right Section */}
+        <div className="md:w-1/3 text-xs md:text-sm text-gray-500 text-center md:text-right">
+          © {new Date().getFullYear()}{" "}
+          <span className="text-white font-semibold">Opiqo</span>. All rights reserved.
         </div>
-      </div>
-
-      {/* Bottom Accent Line */}
-      <div className="mt-6 border-t border-gray-700 pt-4 text-center text-xs text-gray-500">
-        Designed & Developed with ❤️ by Opiqo Team
       </div>
     </footer>
   );
