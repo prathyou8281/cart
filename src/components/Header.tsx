@@ -53,7 +53,7 @@ export default function Header() {
 
         {/* 🛒 Cart Button - Hidden on Home */}
         {!isHomePage && (
-          <Link href="/store">
+          <Link href="/cart">
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
